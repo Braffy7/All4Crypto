@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Cryptocurrencies Portfolio</title>
+    <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+        <section class="wallet">
+            <h1 class="wallet__tit">Your Cryptocurrencies</h1>
+            <div class="wallet__crypto">
+                <div class="name">Bitcoin</div>
+                <div class="DOL">30 000 $</div>
+                <div class="PLN">130 000 zł</div>
+            </div>
+            <div class="wallet__sum">
+                <p>Summary Value:</p>
+                <p>30 000 $</p>
+                <p>130 000 zł</p>
+            </div>
+        </section>
+
+        <section class="list">
+            <h1>Cryptocurrencies</h1>
+            <div class="list__table">
+                <p>Name</p>
+                <p>Market Cap</p>
+                <p>Actuall Value $</p>
+                <p>Actuall Value PLN</p>
+                <p>Amount</p>
+            </div>
+            <div class="list__crypto">
+                <p>Bitcoin</p>
+                <p id="btc-mc">Market Cap</p>
+                <p id="btc-ac-dol">Actuall Value $</p>
+                <p id="btc-ac-pln">Actuall Value PLN</p>
+                <form><input type="number" step="0.0000000001"><button type="submit">Add</button></form>
+            </div>
+        </section>
+    <script src="./script.js"></script>
+</body>
