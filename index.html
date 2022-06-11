@@ -24,13 +24,20 @@
 
         <section class="list">
             <h1>Cryptocurrencies</h1>
-            <div class="list__table">
-                <p>Name</p>
-                <p>Market Cap</p>
-                <p>Actuall Value $</p>
-                <p>Actuall Value PLN</p>
-                <p>Amount</p>
-            </div>
+            <table class="list__table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Symbol </th>
+                        <th scope="col">Market Cap</th>
+                        <th scope="col">Actuall Value $</th>
+                        <th scope="col">Actuall Value PLN</th>
+                        <th scope="col">Amount</th>
+                    </tr>
+                </thead>
+                <tbody id="data">
+                </tbody>
+            </table>
             <div class="list__crypto">
                 <p>Bitcoin</p>
                 <p id="btc-mc">Market Cap</p>

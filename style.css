@@ -55,11 +55,7 @@ h1 {
     padding: 25px;
 }
 .list__table {
-    display: grid;
-        grid-template-columns: repeat(5, 20%);
-        grid-auto-rows: 60px;
-        justify-content: space-between;
-        align-items: center;
+    
 }
 .list__table p {
     display: flex;

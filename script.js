@@ -12,18 +12,34 @@ fetch(`${proxyUrl}${baseUrl}`, {
     }
 }).then((response) => {
     if(response.ok) {
-        response.json().then((json) => displayBTC(json));
+        response.json().then((json) => displayList(json) 
+        );
     }
 }).catch((error) => {
     console.log(error)
 })
 
 
-function displayBTC(json) {
-    console.log(json)
-        console.log(json.data.coins[0].marketCap);
-        let mc = json.data.coins[0].marketCap;
-        let
-        document.querySelector("#btc-mc").innerText = mc;
-        console.log(mc);
-}; 
+function displayList(json) {
+        let coinsData = json.data.coins;
+
+        if (coinsData.length > 0) {
+            var cryptoCoin = "";
+        }
+
+        coinsData.forEach((coin) => {
+        if (coin.price < 1) {
+            var Listprice = coin.price;
+        } else {
+            var Listprice = coin.price;
+            coin.price = parseFloat(coin.price).toFixed(2);
+        };
+        cryptoCoin += "<tr>";
+        cryptoCoin += `<td> ${coin.name} </td>`;
+        cryptoCoin += `<td> ${coin.symbol} </td>`;
+        cryptoCoin += `<td> $ ${(coin.marketCap)} </td>`;
+        cryptoCoin += `<td> $ ${Listprice} </td>`;
+        });
+        document.getElementById("data").innerHTML = cryptoCoin;
+        console.log(json);
+    };
