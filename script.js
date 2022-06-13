@@ -28,18 +28,36 @@ function displayList(json) {
         }
 
         coinsData.forEach((coin) => {
-        if (coin.price < 1) {
-            var Listprice = coin.price;
-        } else {
-            var Listprice = coin.price;
-            coin.price = parseFloat(coin.price).toFixed(2);
-        };
         cryptoCoin += "<tr>";
         cryptoCoin += `<td> ${coin.name} </td>`;
         cryptoCoin += `<td> ${coin.symbol} </td>`;
         cryptoCoin += `<td> $ ${(coin.marketCap)} </td>`;
-        cryptoCoin += `<td> $ ${Listprice} </td>`;
+        
+        if (coin.price < 0.95) {
+            cryptoCoin += `<td> $ ${parseFloat(coin.price).toFixed(8)} </td>`;
+        } else {
+            cryptoCoin += `<td> $ ${parseFloat(coin.price).toFixed(2)} </td>`;
+        };
         });
         document.getElementById("data").innerHTML = cryptoCoin;
         console.log(json);
     };
+
+// API For NBP
+
+var urlNBP = "http://api.nbp.pl/api/exchangerates/rates/{A}/{USD}/"
+
+fetch(`${proxyUrl}${urlNBP}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': "*"
+    }
+}).then((response) => {
+    if(response.ok) {
+        response.json().then((json) => {console.log(json)}
+        );
+    }
+}).catch((error) => {
+    console.log(error)
+})
