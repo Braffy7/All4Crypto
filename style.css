@@ -12,43 +12,27 @@ h1 {
 /* Styles for wallet */
 
 .wallet {
-    position: absolute;
-    left: 10vw;
-    top: 10vh;
-    width: 20vw;
+    width: 25vw;
+    min-width: 300px;
     border: 3px solid black;
     border-radius: 15px;
     padding: 25px;
+    margin: 5vh auto;
 }
     .wallet__tit {
+        text-align: center;
     }
     .wallet__crypto {
-        display: grid;
-            grid-template-columns: repeat(3, 30%);
-            grid-auto-rows: 60px;
-            justify-content: space-between;
-            align-items: center;
+       margin: 0 auto;
     }
-        .name{
-            grid-column: 1;
-        }
-        .DOL{
-            grid-column: 2;
-        }
-        .PLN{
-            grid-column: 3;
-        }
-    .wallet__sum {
-        display: flex;
-        justify-content: space-between;
-    }
+    .wallet__crypto th {
+        padding: 0.5vh;
+     }
 
 /* Styles for list */
 
 .list {
-    position: absolute;
-    right: 10vw;
-    top: 10vh;
+    margin: 0 auto;
     width: 50vw;
     border: 3px solid black;
     border-radius: 15px;
@@ -57,12 +41,6 @@ h1 {
 .list__table {
     
 }
-.list__table p {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .list__crypto {
     display: grid;
         grid-template-columns: repeat(5, 20%);
