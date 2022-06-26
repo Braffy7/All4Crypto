@@ -41,17 +41,17 @@ function displayList(data) {
 
     coinsData.forEach((coin) => {
     cryptoCoin += `<tr>`;
-    cryptoCoin += `<td> ${coin.name} </td>`;
-    cryptoCoin += `<td> ${coin.symbol} </td>`;
-    cryptoCoin += `<td> $ ${(coin.marketCap)} </td>`;
+    cryptoCoin += `<td class='name'> ${coin.name} </td>`;
+    cryptoCoin += `<td class='symbol'> ${coin.symbol} </td>`;
+    cryptoCoin += `<td class='marketCap'> $ ${(coin.marketCap)} </td>`;
     if (coin.price < 0.95) {
-        cryptoCoin += `<td> $ ${parseFloat(coin.price).toFixed(8)} </td>`;
-        cryptoCoin += `<td> PLN ${(parseFloat(coin.price)*parseFloat(valueUSD)).toFixed(8)} </td>`;
+        cryptoCoin += `<td class='price'> $ ${parseFloat(coin.price).toFixed(8)} </td>`;
+        cryptoCoin += `<td class='pricePLN'> PLN ${(parseFloat(coin.price)*parseFloat(valueUSD)).toFixed(8)} </td>`;
     } else {
-        cryptoCoin += `<td> $ ${parseFloat(coin.price).toFixed(2)} </td>`;
-        cryptoCoin += `<td> PLN ${(parseFloat(coin.price)*parseFloat(valueUSD)).toFixed(2)} </td>`;
+        cryptoCoin += `<td class='price'> $ ${parseFloat(coin.price).toFixed(2)} </td>`;
+        cryptoCoin += `<td class='pricePLN'> PLN ${(parseFloat(coin.price)*parseFloat(valueUSD)).toFixed(2)} </td>`;
     };
-        cryptoCoin += `<td><form><input name="inputAmount" type="number" step="0.0000000001"><button type="submit">Add</button></form></td>`
+        cryptoCoin += `<td><form><input name="inputAmount" type="number" step="0.0000000001" required><button type="submit">Add</button></form></td>`
     });
 
     document.getElementById("data").innerHTML = cryptoCoin;
@@ -64,8 +64,12 @@ function cryptoAmount() {
 
     table.addEventListener('submit', (event) => {
         event.preventDefault();
-        item = event.target.inputAmount;
-        console.log(item.value);
-        
+        amount = event.target.inputAmount;
+        console.log(amount.value);
+        const coinRow = amount.parentElement.parentElement.parentElement;
+        console.log(coinRow.querySelector('.name').textContent);
+        console.log(coinRow.querySelector('.marketCap').textContent.match(/(\d+)/)[0]);
+        console.log(coinRow.querySelector('.price').textContent.match(/(\d+)/)[0]);
+        console.log(coinRow.querySelector('.pricePLN').textContent.match(/(\d+)/)[0]);
 });
 };
