@@ -13,16 +13,14 @@
             <table class="wallet__crypto">
                 <thead>
                     <tr>
-                        <th>Summary Value:</th>
-                        <th>30 000 $</th>
-                        <th>130 000 zł</th> 
-                    </tr>
-                    <tr>
-                        <th class="name">Bitcoin</th>
-                        <th class="DOL">30 000 $</th>
-                        <th class="PLN">130 000 zł</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price $</th>
+                        <th scope="col">Amount</th> 
+                        <th scope="col">Value $</th> 
                     </tr>
                 </thead>
+                <tbody id="usersCrypto">
+                </tbody>
             </table>
         </section>
 
@@ -34,21 +32,14 @@
                         <th scope="col">Name</th>
                         <th scope="col">Symbol </th>
                         <th scope="col">Market Cap</th>
-                        <th scope="col">Actuall Value $</th>
-                        <th scope="col">Actuall Value PLN</th>
+                        <th scope="col">Price $</th>
+                        <th scope="col">Price PLN</th>
                         <th scope="col">Amount</th>
                     </tr>
                 </thead>
                 <tbody id="data">
                 </tbody>
             </table>
-            <div class="list__crypto">
-                <p>Bitcoin</p>
-                <p id="btc-mc">Market Cap</p>
-                <p id="btc-ac-dol">Actuall Value $</p>
-                <p id="btc-ac-pln">Actuall Value PLN</p>
-                <form><input type="number" step="0.0000000001"><button type="submit">Add</button></form>
-            </div>
         </section>
     <script src="./script.js"></script>
 </body>
