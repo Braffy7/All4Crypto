@@ -27,7 +27,7 @@ Promise.all([
         }));
     }).then((data) => {
         Promise.all([
-            displayList(data), cryptoAmount()]);
+            displayList(data), addingCoin(), ]);
     }).catch((error) => {
         console.log(error)
     });
@@ -61,36 +61,60 @@ function displayList(data) {
 
 // Adding Cryptocurrencies to wallet
 
-function cryptoAmount() {
+function addingCoin() {
     const table = document.querySelector('.list__table');
 
     table.addEventListener('submit', (event) => {
         event.preventDefault();
-
-        const walletCryptos = document.querySelector('#usersCrypto');
-        const walletAmount = event.target.inputAmount;
-        const coinRow = walletAmount.parentElement.parentElement.parentElement;
-        const walletName = coinRow.querySelector('.name').textContent;
-        const walletPrice = coinRow.querySelector('.price').textContent.match(/\d+(\.\d+)?/)[0];
-        const walletValue = walletAmount.value*coinRow.querySelector('.price').textContent.match(/\d+(\.\d+)?/)[0];
         
+        const walletCryptos = document.querySelector('#usersCrypto');
+        const coinAmount = event.target.inputAmount;
+        const coinRow = coinAmount.parentElement.parentElement.parentElement;
+        const coinName = coinRow.querySelector('.name').textContent;
+        const coinSymbol = coinRow.querySelector('.symbol').textContent;
+        const coinPrice = coinRow.querySelector('.price').textContent.match(/\d+(\.\d+)?/)[0];
+        const coinValue = coinAmount.value*coinPrice;
+        const amountClass = '.' + coinSymbol + '-amount';
+        const existingCoin = document.querySelectorAll(amountClass.replace(/ /g,''));
+
+        if (existingCoin.length > 0) {
+            existingCoin[0].innerText = parseFloat(coinAmount.value) + parseFloat(existingCoin[0].textContent);
+
+            const valueClass = '.' + coinSymbol;
+            const addedValue = coinPrice*parseFloat(existingCoin[0].textContent);
+            
+            
+            if (addedValue < 0.95) {
+                document.querySelector(valueClass.replace(/ /g,'')).innerText = addedValue.toFixed(8);
+            } else {
+                document.querySelector(valueClass.replace(/ /g,'')).innerText = addedValue.toFixed(2);  
+            };
+
+            coinAmount.value = "";
+
+        } else {
         const newTr = document.createElement("tr");
         const nameTh = document.createElement("th");
         const priceTh = document.createElement("th");
         const amountTh = document.createElement("th");
         const valueTh = document.createElement("th");
+        
+        nameTh.innerText = coinName;
 
-        nameTh.innerText = walletName;
-        if (walletPrice < 0.95) {
-            priceTh.innerText = parseFloat(walletPrice).toFixed(8);
+        if (coinPrice < 0.95) {
+            priceTh.innerText = parseFloat(coinPrice).toFixed(8);
         } else {
-            priceTh.innerText = parseFloat(walletPrice).toFixed(2);  
+            priceTh.innerText = parseFloat(coinPrice).toFixed(2);  
         };
-        amountTh.innerText = walletAmount.value;
-        if (walletValue < 0.95) {
-            valueTh.innerText = parseFloat(walletValue).toFixed(8);
+
+        amountTh.innerText = coinAmount.value;
+        amountTh.className += (coinSymbol + '-amount').replace(/ /g,'');
+
+        valueTh.className += (coinSymbol + '-value');
+        if (coinValue < 0.95) {
+            valueTh.innerText = parseFloat(coinValue).toFixed(8);
         } else {
-            valueTh.innerText = parseFloat(walletValue).toFixed(2);  
+            valueTh.innerText = parseFloat(coinValue).toFixed(2); 
         };
 
         walletCryptos.appendChild(newTr);
@@ -99,6 +123,56 @@ function cryptoAmount() {
         walletCryptos.appendChild(amountTh);
         walletCryptos.appendChild(valueTh);
 
-        walletAmount.value = "";
-});
+        coinAmount.value = "";
+
+        sumUpWallet();
+        };
+
+        function sumUpWallet() {
+                const values = document.querySelectorAll('.-value');
+                console.log(values)
+                
+                console.log(values.length)
+                let sumVal = 0;
+                for (var i = 0; i < values.length; i++) {
+                    sumVal += parseFloat(values[i].innerHTML);
+                
+            };
+            console.log(sumVal);
+            document.getElementById("sumDol").innerHTML = sumVal.toFixed(2);
+        }
+
+
+        /*
+        function sumUpWallet() {
+            var walletTable = document.getElementById("wallet__crypto");
+            console.log(walletTable);
+            console.log(walletTable.rows.length);
+            let sumVal = 0;
+            console.log(sumVal);
+            
+            for (var i = 1; i < (walletTable.rows.length - 2); i++) {
+                const tableData = walletTable.rows[i].cells[3];
+                if (tableData && tableData.textContent) {
+                    const value = parseFloat(tableData.textContent);
+                    if (!isNaN(value)) {
+                    sumVal = sumVal + value;
+                    }
+                }
+        }
+            
+            console.log(sumVal);
+            document.getElementById("sumDol").innerHTML = sumVal.toFixed(2);
+        };
+        */
+        /*
+        function sumUpWallet() {
+            var walletTable = document.getElementById("usersCrypto");
+            let subTotal = Array.from(walletTable.rows).slice(1).reduce((total, row) => {
+            return total + parseFloat(row.cells[3].textContent);
+            }, 0);
+            document.getElementById("sumDol").innerHTML = subTotal.toFixed(2);
+    }
+    */
+    });
 };

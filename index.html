@@ -10,7 +10,7 @@
 <body>
         <section class="wallet">
             <h1 class="wallet__tit">Your Cryptocurrencies</h1>
-            <table class="wallet__crypto">
+            <table id="wallet__crypto">
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
@@ -21,6 +21,18 @@
                 </thead>
                 <tbody id="usersCrypto">
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th scope="col" colspan="2"></th>
+                        <th scope="col">PLN</th>
+                        <th scope="col">DOL $</th>
+                    </tr>
+                    <tr>
+                        <th colspan="2">Summary Value: </th>
+                        <th id = "sumPln"></th>
+                        <th id ="sumDol"></th>
+                    </tr>
+                </tfoot>
             </table>
         </section>
 
