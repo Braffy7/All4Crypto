@@ -5,7 +5,7 @@ var urlNBP = "http://api.nbp.pl/api/exchangerates/rates/A/USD/";
 
 var usdToPln = "" // value to use in cryptoAmount()
 
-// API for cryptocurrencies & function creating Name / Symbol / Market Cap / Value $
+// API for cryptocurrencies 
 
 Promise.all([
     fetch(`${proxyUrl}${baseUrl}`, { 
@@ -32,6 +32,7 @@ Promise.all([
         console.log(error)
     });
 
+    // function creating Name / Symbol / Market Cap / Value $
 
 function displayList(data) {
     let coinsData = data[0].data.coins;
@@ -91,6 +92,7 @@ function addingCoin() {
             };
 
             coinAmount.value = "";
+            sumUpWallet();
 
         } else {
         const newTr = document.createElement("tr");
@@ -124,55 +126,19 @@ function addingCoin() {
         walletCryptos.appendChild(valueTh);
 
         coinAmount.value = "";
-
         sumUpWallet();
         };
 
+        // Function summing up values in the wallet
+
         function sumUpWallet() {
                 const values = document.querySelectorAll('.-value');
-                console.log(values)
-                
-                console.log(values.length)
                 let sumVal = 0;
                 for (var i = 0; i < values.length; i++) {
                     sumVal += parseFloat(values[i].innerHTML);
-                
             };
-            console.log(sumVal);
             document.getElementById("sumDol").innerHTML = sumVal.toFixed(2);
-        }
-
-
-        /*
-        function sumUpWallet() {
-            var walletTable = document.getElementById("wallet__crypto");
-            console.log(walletTable);
-            console.log(walletTable.rows.length);
-            let sumVal = 0;
-            console.log(sumVal);
-            
-            for (var i = 1; i < (walletTable.rows.length - 2); i++) {
-                const tableData = walletTable.rows[i].cells[3];
-                if (tableData && tableData.textContent) {
-                    const value = parseFloat(tableData.textContent);
-                    if (!isNaN(value)) {
-                    sumVal = sumVal + value;
-                    }
-                }
-        }
-            
-            console.log(sumVal);
-            document.getElementById("sumDol").innerHTML = sumVal.toFixed(2);
+            document.getElementById("sumPln").innerHTML = (sumVal*usdToPln).toFixed(2);
         };
-        */
-        /*
-        function sumUpWallet() {
-            var walletTable = document.getElementById("usersCrypto");
-            let subTotal = Array.from(walletTable.rows).slice(1).reduce((total, row) => {
-            return total + parseFloat(row.cells[3].textContent);
-            }, 0);
-            document.getElementById("sumDol").innerHTML = subTotal.toFixed(2);
-    }
-    */
     });
 };
