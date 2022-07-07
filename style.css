@@ -29,7 +29,7 @@ h1 {
         padding: 0.5vh;
      }
 
-/* Styles for list */
+/* Styles for popUp */
 
 .list {
     margin: 0 auto;
@@ -37,6 +37,88 @@ h1 {
     border: 3px solid black;
     border-radius: 15px;
     padding: 25px;
+}
+
+/* Styles for list */
+
+.list__popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    box-sizing: border-box;
+
+    opacity: 0;
+    animation-name: confirm---open;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.list__popup__window {
+    width: 100%;
+    max-width: 600px;
+    background: #222222;
+    font-family: 'Noto Sans', sans-serif;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    padding: 1.5em;
+
+    opacity: 0;
+    transform: scale(0.75);
+    animation-name: confirm__window---open;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+    animation-delay: 0.2s;
+}
+.list__popup__title {
+    background: #222222;
+    color: #e6e224;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.4rem;
+
+}
+.list__popup__text {
+    padding: 1rem;
+    background: #222222;
+    color: #e6e224;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+.list__popup__buttons {
+    background: #222222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem
+}
+.list__popup__buttons button {
+    padding: 0.4em 0.8em;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    border: 2px solid #e6e224;
+    border-radius: 5px;
+    background: #292929;
+    color: #e6e224;
+    font-weight: bold;
+    font-size: 1.1em;
+    cursor: pointer;
+    outline: none;
+}
+.hidden {
+    display: none;
 }
 .list__table {
     
@@ -60,4 +142,23 @@ h1 {
 }
 .list__crypto input{
     width: 7vw;
+}
+
+ /* KEYFRAMES */
+
+ @keyframes confirm---open {
+    from { opacity: 0 }
+    to { opacity: 1 }
+}
+
+@keyframes confirm---close {
+    from { opacity: 1 }
+    to { opacity: 0 }
+}
+
+@keyframes confirm__window---open {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
