@@ -27,7 +27,16 @@ h1 {
     }
     .wallet__crypto th {
         padding: 0.5vh;
-     }
+    }
+    .deleteBtn {
+        background: url("x-button.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 4vh;
+        width: 2vw;
+        
+    }
 
 /* Styles for list */
 
