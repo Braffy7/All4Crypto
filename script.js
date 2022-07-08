@@ -196,8 +196,8 @@ table.addEventListener('submit', (event) => {
             for (var i = 0; i < values.length; i++) {
                 sumVal += parseFloat(values[i].innerHTML);
         };
-        document.getElementById("sumDol").innerHTML = sumVal.toFixed(2);
-        document.getElementById("sumPln").innerHTML = (sumVal*usdToPln).toFixed(2);
+        document.getElementById('sumDol').innerHTML = sumVal.toFixed(2);
+        document.getElementById('sumPln').innerHTML = (sumVal*usdToPln).toFixed(2);
     }};
 
     // Confirm Window 
@@ -210,3 +210,24 @@ table.addEventListener('submit', (event) => {
         }
     });
 });
+
+// Searching funcionality
+
+const searchInput = document.getElementById('inputSearch');
+
+searchInput.addEventListener('input', filterList);
+
+function filterList() {
+    const filter = searchInput.value.toLowerCase();
+    const listCoins = document.querySelectorAll('.name');
+
+    listCoins.forEach((coin) => {
+        let row = coin.parentElement;
+        let text = coin.textContent + row.cells[1].textContent;
+        if(text.toLowerCase().includes(filter.toLowerCase())){
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+}

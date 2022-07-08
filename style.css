@@ -29,7 +29,7 @@ h1 {
         padding: 0.5vh;
      }
 
-/* Styles for popUp */
+/* Styles for list */
 
 .list {
     margin: 0 auto;
@@ -38,8 +38,41 @@ h1 {
     border-radius: 15px;
     padding: 25px;
 }
+.list__header {
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+}
+.list__header h1 {
+    font-size: 3.5vw;
+    margin: 1vw;
+}
 
-/* Styles for list */
+.list__table {
+    
+}
+.list__crypto {
+    display: grid;
+        grid-template-columns: repeat(5, 20%);
+        grid-auto-rows: 60px;
+        justify-content: space-between;
+        align-items: center;
+}
+.list__crypto p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.list__crypto form {
+    display: flex;
+    justify-content: center;
+    gap: 1px;
+}
+.list__crypto input{
+    width: 7vw;
+}
+
+/* Styles for popUp */
 
 .list__popup {
     position: fixed;
@@ -116,32 +149,6 @@ h1 {
     font-size: 1.1em;
     cursor: pointer;
     outline: none;
-}
-.hidden {
-    display: none;
-}
-.list__table {
-    
-}
-.list__crypto {
-    display: grid;
-        grid-template-columns: repeat(5, 20%);
-        grid-auto-rows: 60px;
-        justify-content: space-between;
-        align-items: center;
-}
-.list__crypto p {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.list__crypto form {
-    display: flex;
-    justify-content: center;
-    gap: 1px;
-}
-.list__crypto input{
-    width: 7vw;
 }
 
  /* KEYFRAMES */
