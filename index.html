@@ -5,59 +5,60 @@
 <head>
     <meta charset="utf-8" />
     <title>Cryptocurrencies Portfolio</title>
-    <link rel="stylesheet" href="style.css" type="text/css" />
+    <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body>
-        <section class="wallet">
-            <h1 class="wallet__tit">Your Cryptocurrencies</h1>
-            <table id="wallet__crypto">
-                <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Price $</th>
-                        <th scope="col">Amount</th> 
-                        <th scope="col">Value $</th> 
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="usersCrypto">
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th scope="col" colspan="2"></th>
-                        <th scope="col">PLN</th>
-                        <th scope="col">DOL $</th>
-                    </tr>
-                    <tr>
-                        <th colspan="2">Summary Value: </th>
-                        <th id = "sumPln"></th>
-                        <th id ="sumDol"></th>
-                    </tr>
-                </tfoot>
-            </table>
-        </section>
+    <header class="bar">
+        <img class="bar__logo" src="logo.png" alt="All4Crypto - logo">
 
-        <section class="list">
-            <div class="list__header">
-            <h1>Cryptocurrencies</h1>
-            <form>
-                <input id="inputSearch" type="text" placeholder="Search..." required>
-            </form>
-            </div>
-            <table class="list__table">
-                <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Symbol </th>
-                        <th scope="col">Market Cap</th>
-                        <th scope="col">Price $</th>
-                        <th scope="col">Price PLN</th>
-                        <th scope="col">Amount</th>
-                    </tr>
-                </thead>
-                <tbody id="data">
-                </tbody>
-            </table>
-        </section>
+    </header>
+    <section class="wallet">
+        <h1 class="wallet__tit">Your Cryptocurrencies</h1>
+        <table id="wallet__crypto">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price $</th>
+                    <th scope="col">Amount</th> 
+                    <th scope="col">Value $</th> 
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="usersCrypto">
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th scope="col" colspan="2"></th>
+                    <th scope="col">PLN</th>
+                    <th scope="col">DOL $</th>
+                </tr>
+                <tr>
+                    <th colspan="2">Summary Value: </th>
+                    <th id = "sumPln"></th>
+                    <th id ="sumDol"></th>
+                </tr>
+            </tfoot>
+        </table>
+    </section>
+
+    <section class="list">
+        <table class="list__table">
+            <thead>
+                <tr class="list__table__nav">
+                    <th class="list__table__nav--name" scope="col">Name</th>
+                    <th class="list__table__nav--symbol" scope="col">Symbol </th>
+                    <th class="list__table__nav--marketCap" scope="col">Market Cap</th>
+                    <th class="list__table__nav--price" scope="col">$ Price</th>
+                    <th class="list__table__nav--pricePLN" scope="col">PLN Price</th>
+                    <th class="list__table__nav--amount" scope="col"><form>
+                        <input id="inputSearch" type="text" placeholder="Search..." required>
+                    </form></th>
+                </tr>
+            </thead>
+            <tbody id="data">
+            </tbody>
+        </table>
+    </section>
+    <footer class="footer"></footer>
     <script src="./script.js"></script>
 </body>

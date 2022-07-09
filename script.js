@@ -42,13 +42,13 @@ function displayList(data) {
     usdToPln = valueUSD;
 
     coinsData.forEach((coin) => {
-    cryptoCoin += `<tr>`;
-    cryptoCoin += `<td class='name'> ${coin.name} </td>`;
-    cryptoCoin += `<td class='symbol'> ${coin.symbol} </td>`;
-    cryptoCoin += `<td class='marketCap'> $ ${(coin.marketCap)} </td>`;
-    cryptoCoin += `<td class='price'> $ ${parseFloat(coin.price)} </td>`;
-    cryptoCoin += `<td class='pricePLN'> PLN ${(parseFloat(coin.price)*parseFloat(valueUSD)).toFixed(2)} </td>`;
-    cryptoCoin += `<td><form><input name="inputAmount" type="number" step="0.00000001" required><button type="submit">Add</button></form></td>`
+        cryptoCoin += `<tr>`;
+        cryptoCoin += `<td class='name'> ${coin.name} </td>`;
+        cryptoCoin += `<td class='symbol'> ${coin.symbol} </td>`;
+        cryptoCoin += `<td class='marketCap'> $ ${(coin.marketCap)} </td>`;
+        cryptoCoin += `<td class='price'> $ ${parseFloat(coin.price)} </td>`;
+        cryptoCoin += `<td class='pricePLN'> PLN ${(parseFloat(coin.price)*parseFloat(valueUSD)).toFixed(2)} </td>`;
+        cryptoCoin += `<td><form><input name="inputAmount" type="number" step="0.00000001" placeholder="Amount.." required><button type="submit"></button></form></td>`;
     });
 
     document.getElementById("data").innerHTML = cryptoCoin;  

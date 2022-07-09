@@ -1,12 +1,27 @@
-* {
-    border: 1px solid red;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;700&family=Titillium+Web:wght@400;600;700;900&display=swap');
+
+/* * {border: 1px solid red;}  */
+* {box-sizing: border-box;}
 body {
     margin: 0;
+    background-color: #292929;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Titillium Web', sans-serif;
 }
 h1 {
     display: flex;
     justify-content: center;
+}
+.bar {
+    height: 7vh;
+    background-color: #FFD700;
+    display: flex;
+    align-items: center;
+}
+.bar__logo {
+    height: 6vh;
+    margin-left: 1vw;
 }
 
 /* Styles for wallet */
@@ -35,14 +50,14 @@ h1 {
         background-position: center;
         height: 4vh;
         width: 2vw;
-        
+        cursor: pointer;
     }
 
 /* Styles for list */
 
 .list {
     margin: 0 auto;
-    width: 50vw;
+    width: fit-content;
     border: 3px solid black;
     border-radius: 15px;
     padding: 25px;
@@ -56,29 +71,76 @@ h1 {
     font-size: 3.5vw;
     margin: 1vw;
 }
-
 .list__table {
-    
+    border-spacing: 0;
+    border-collapse: collapse;
 }
-.list__crypto {
-    display: grid;
-        grid-template-columns: repeat(5, 20%);
-        grid-auto-rows: 60px;
-        justify-content: space-between;
-        align-items: center;
+.list__table td {
+    padding-left: 1.5vw;
+    padding-right: 1.5vw;
+    padding-top: 1.5vh;
+    padding-bottom: 1.5vh;
+    font-size: 1vw;
+    white-space: nowrap;
 }
-.list__crypto p {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.list__table input {
+    width: 5vw;
+    font-size: 0.8vw;
+    padding: 0.3vh;
+    border: none;
 }
-.list__crypto form {
-    display: flex;
-    justify-content: center;
-    gap: 1px;
+.list__table button {
+    background: url(https://cdn-icons-png.flaticon.com/512/1417/1417434.png);
+    background-size: 1vw;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #FFD700;
+    width: 1.5vw;
+    border: none;
+    cursor: pointer;
 }
-.list__crypto input{
+.list__table button:focus {
+    background-size: 0.8vw;
+    transition: 0.5s;
+}
+.list__table form {
     width: 7vw;
+    display: flex;
+}
+#data tr {
+    border-bottom: 1px solid rgb(117, 117, 117);
+    background-color: rgb(59, 59, 59);
+}
+#data tr:hover {
+    background-color: rgb(80, 80, 80);
+}
+.list__table__nav th {
+    font-size: 1vw;
+    padding: 1.5vh;
+    padding-left: 1.5vw;
+    padding-right: 1.5vw;
+}
+.list__table__nav {
+    background-color: rgb(20, 19, 19);
+}
+.marketCap, .price, .pricePLN {
+    text-align: right;
+}
+.list__table__nav--name, .list__table__nav--symbol {
+    text-align: left;
+}
+.list__table__nav--marketCap, .list__table__nav--price, .list__table__nav--pricePLN {
+    text-align: right;
+} 
+#inputSearch {
+    font-size: 1vw;
+    border-radius: 10px;
+    width: 6vw;
+    padding: 0.5vh;
+    border: 2px solid rgb(20, 19, 19);
+}
+#inputSearch:hover {
+    border: 2px solid #FFD700;
 }
 
 /* Styles for popUp */
@@ -91,7 +153,6 @@ h1 {
     height: 100%;
     background: rgba(0, 0, 0, 0.6);
     padding: 10px;
-    box-sizing: border-box;
 
     opacity: 0;
     animation-name: confirm---open;
@@ -106,11 +167,10 @@ h1 {
     width: 100%;
     max-width: 600px;
     background: #222222;
-    font-family: 'Noto Sans', sans-serif;
     border-radius: 5px;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    padding: 1.5em;
+    padding: 30px;
 
     opacity: 0;
     transform: scale(0.75);
@@ -121,43 +181,58 @@ h1 {
 }
 .list__popup__title {
     background: #222222;
-    color: #e6e224;
+    color: #FFD700;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    font-size: 1.4rem;
+    font-size: 30px;
 
 }
 .list__popup__text {
-    padding: 1rem;
+    padding: 25px;
     background: #222222;
-    color: #e6e224;
+    color: #FFD700;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: bold;
-    font-size: 1.1rem;
+    font-weight: lighter;
+    font-size: 22px;
 }
 .list__popup__buttons {
     background: #222222;
     display: flex;
-    justify-content: center;
+    justify-content:flex-end;
     align-items: center;
-    margin-top: 1rem
+    margin-top: 20px;
 }
+
 .list__popup__buttons button {
-    padding: 0.4em 0.8em;
-    margin-right: 1rem;
-    margin-left: 1rem;
-    border: 2px solid #e6e224;
+    padding: 10px 15px;
+    margin-right: 10px;
+    margin-left: 10px;
+    border: 2px solid #FFD700;
     border-radius: 5px;
-    background: #292929;
-    color: #e6e224;
+    color: #FFD700;
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 20px;
     cursor: pointer;
     outline: none;
+}
+.list__popup__buttons button:hover{
+    transition: 0.2s;
+    background: #6969fa;
+}
+.list__popup__confirm {
+    background: #444388;
+}
+.list__popup__cancel {
+    background: rgb(59, 59, 59);
+}
+.footer {
+    height: 7vh;
+    background-color: #FFD700;
+    margin-top: 10vh;
 }
 
  /* KEYFRAMES */
