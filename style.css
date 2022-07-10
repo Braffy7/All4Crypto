@@ -23,11 +23,12 @@ body {
 /* Styles for wallet */
 
 .wallet {
-    position: sticky;
-    top: 0;
+    position: fixed;
+    top: 7vh;
     width: fit-content;
     border: 2px solid black;
     border-radius: 0 0 20px;
+    
 }
     #wallet__crypto {
        margin: 0 auto;
@@ -64,7 +65,7 @@ body {
             color: black;
         }
 
-    .wallet__icon {
+    .wallet__bottom__icon {
         position: relative;
         background-color: #FFD700;
         height: 14vh;
@@ -75,12 +76,13 @@ body {
         justify-content: center;
         border: 3px solid white;
         border-radius: 0 0 20px;
+        cursor: pointer;
     }
-        .wallet__icon--wal {
+        .wallet__bottom__icon--wal {
             width: auto;
             height: 10vh;
         }
-        .wallet__icon--arrow {
+        .wallet__bottom__icon--arrow {
             width: auto;
             height: 10vh;
             transform: rotate(45deg);
@@ -88,23 +90,42 @@ body {
             top: 5.7vh;
             left: 5.7vh;
         }
-        .flex {
+        .wallet__bottom__icon--arrowA {
+            width: auto;
+            height: 10vh;
+            transform: rotate(-135deg);
+            position: absolute;
+            top: -2.5vh;
+            left: -2.5vh;
+        }
+        .wallet__bottom {
             display: flex;
             justify-content: right;
             background-color: #292929;
             align-items: center;
+            border-radius: 0 20px 20px 0;
         }
-            .flex div {
+            .wallet__bottom__text {
                 font-size: 1vw;
                 font-weight: 100;
-                padding: 1vw
+                margin: 0 auto;
             }
+        .hidden {
+            display: none;
+        }
+        .sticky {
+            position: fixed;
+            top: 7vh;
+            left: 0;
+            border-radius: 0 20px 20px 0;
+        }
 
 
 /* Styles for list */
 
 .list {
     margin: 0 auto;
+    margin-top: 10vh;
     width: fit-content;
     border: 3px solid black;
     border-radius: 15px;

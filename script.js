@@ -239,3 +239,17 @@ function filterList() {
         }
     });
 };
+
+// Wallet Animation
+const walletBtnA = document.querySelector('#walletBtnA');
+const walletBtnB = document.querySelector('#walletBtnB');
+const walletWindow = document.querySelector('.wallet');
+
+walletBtnB.addEventListener('click', ()=> {
+    walletWindow.classList.toggle('hidden');
+    walletBtnB.classList.toggle('hidden');
+})
+walletBtnA.addEventListener('click', ()=> {
+    walletWindow.classList.toggle('hidden');
+    walletBtnB.classList.toggle('hidden');
+})

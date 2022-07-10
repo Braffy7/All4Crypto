@@ -12,7 +12,7 @@
         <img class="bar__logo" src="logo.png" alt="All4Crypto - logo">
     </header>
 
-    <section class="wallet">
+    <section class="wallet hidden">
 
         <table id="wallet__crypto">
             <thead>
@@ -40,15 +40,20 @@
             </tfoot>
         </table>
 
-        <div class="flex">
-            <div>You have to be logged in to safe your wallet</div>
-            <div class="wallet__icon">
-                <img class="wallet__icon--wal" src="https://cdn-icons-png.flaticon.com/512/6229/6229884.png">
-                <img class="wallet__icon--arrow" src="https://cdn-icons-png.flaticon.com/512/892/892528.png">
+        <div class="wallet__bottom">
+            <div class="wallet__bottom__text">You have to be logged in to safe your wallet</div>
+            <div class="wallet__bottom__icon" id="walletBtnA">
+                <img class="wallet__bottom__icon--wal" src="https://cdn-icons-png.flaticon.com/512/6229/6229884.png">
+                <img class="wallet__bottom__icon--arrowA" src="https://cdn-icons-png.flaticon.com/512/892/892528.png">
             </div>
         </div>
 
     </section>
+
+    <div class="wallet__bottom__icon sticky" id="walletBtnB">
+        <img class="wallet__bottom__icon--wal" src="https://cdn-icons-png.flaticon.com/512/6229/6229884.png">
+        <img class="wallet__bottom__icon--arrow" src="https://cdn-icons-png.flaticon.com/512/892/892528.png">
+    </div>
 
     <section class="list">
 
