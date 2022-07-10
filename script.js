@@ -160,6 +160,7 @@ table.addEventListener('submit', (event) => {
     const priceTh = document.createElement("th");
     const amountTh = document.createElement("th");
     const valueTh = document.createElement("th");
+    const deleteDiv = document.createElement("div");
     const deleteTh = document.createElement("th");
     
     nameTh.innerText = coinName;
@@ -180,10 +181,10 @@ table.addEventListener('submit', (event) => {
         valueTh.innerText = parseFloat(coinValue).toFixed(2); 
     };
 
-    deleteTh.classList.add('deleteBtn');
+    deleteDiv.classList.add('deleteBtn');
 
     // Deleting coin in wallet
-    deleteTh.addEventListener('click', ()=> {
+    deleteDiv.addEventListener('click', ()=> {
         const walletRow = deleteTh.parentElement;
         
         Confirm.open({
@@ -200,6 +201,7 @@ table.addEventListener('submit', (event) => {
     newTr.appendChild(priceTh);
     newTr.appendChild(amountTh);
     newTr.appendChild(valueTh);
+    deleteTh.appendChild(deleteDiv);
     newTr.appendChild(deleteTh);
 
     coinAmount.value = "";

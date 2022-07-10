@@ -10,13 +10,13 @@
 <body>
     <header class="bar">
         <img class="bar__logo" src="logo.png" alt="All4Crypto - logo">
-
     </header>
+
     <section class="wallet">
-        <h1 class="wallet__tit">Your Cryptocurrencies</h1>
+
         <table id="wallet__crypto">
             <thead>
-                <tr>
+                <tr class="wallet__crypto__bar">
                     <th scope="col">Name</th>
                     <th scope="col">Price $</th>
                     <th scope="col">Amount</th> 
@@ -29,19 +29,29 @@
             <tfoot>
                 <tr>
                     <th scope="col" colspan="2"></th>
-                    <th scope="col">PLN</th>
-                    <th scope="col">DOL $</th>
+                    <th class="wallet__crypto__bar" scope="col">PLN</th>
+                    <th class="wallet__crypto__bar" colspan="2" scope="col">DOL $</th>
                 </tr>
                 <tr>
-                    <th colspan="2">Summary Value: </th>
+                    <th class="wallet__crypto__bar" colspan="2">Summary Value: </th>
                     <th id = "sumPln"></th>
-                    <th id ="sumDol"></th>
+                    <th id ="sumDol" colspan="2"></th>
                 </tr>
             </tfoot>
         </table>
+
+        <div class="flex">
+            <div>You have to be logged in to safe your wallet</div>
+            <div class="wallet__icon">
+                <img class="wallet__icon--wal" src="https://cdn-icons-png.flaticon.com/512/6229/6229884.png">
+                <img class="wallet__icon--arrow" src="https://cdn-icons-png.flaticon.com/512/892/892528.png">
+            </div>
+        </div>
+
     </section>
 
     <section class="list">
+
         <table class="list__table">
             <thead>
                 <tr class="list__table__nav">
@@ -58,7 +68,11 @@
             <tbody id="data">
             </tbody>
         </table>
+
     </section>
+
     <footer class="footer"></footer>
+
     <script src="./script.js"></script>
+    
 </body>
