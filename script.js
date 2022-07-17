@@ -3,34 +3,28 @@ var proxyUrl = "https://corsproxy.io/?";
 var apiKey = "coinranking7f186a64cb9582061ee9f9cc76f5cd9cf26064a0cf336549";
 var urlNBP = "http://api.nbp.pl/api/exchangerates/rates/A/USD/";
 
-var usdToPln = "" // value to use in sumUpWallet()
+var usdToPln = "" // variable to use in sumUpWallet()
 
 // API for cryptocurrencies 
 Promise.all([
     fetch(`${proxyUrl}${baseUrl}`, { 
         method: 'GET',
         headers: {
-        'Content-Type': 'application/json',
         'X-My-Custom-Header': `${apiKey}`,
-        'Access-Control-Allow-Origin': "*"
         }}),
     fetch(`${proxyUrl}${urlNBP}`, {
         method: 'GET',
-        headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': "*"
-        }})
+        headers: {}})
     ]).then((responses) => {
         return Promise.all(responses.map(function (response) {
             return response.json();
         }));
     }).then((data) => {
         Promise.all([
-            displayList(data) ]); // Promise to delete at the end of work
+            displayList(data), getCoins(data)]); // Promise to delete at the end of work
     }).catch((error) => {
         console.log(error);
     });
-
 // function creating Name / Symbol / Market Cap / Price $ / Price PLN
 function displayList(data) {  
     let coinsData = data[0].data.coins;
@@ -42,7 +36,7 @@ function displayList(data) {
     usdToPln = valueUSD;
 
     coinsData.forEach((coin) => {
-        cryptoCoin += `<tr>`;
+        cryptoCoin += `<tr id=${coin.name}>`;
         cryptoCoin += `<td class='name'> ${coin.name} </td>`;
         cryptoCoin += `<td class='symbol'> ${coin.symbol} </td>`;
         cryptoCoin += `<td class='marketCap'> $ ${(coin.marketCap)} </td>`;
@@ -50,7 +44,6 @@ function displayList(data) {
         cryptoCoin += `<td class='pricePLN'> PLN ${(parseFloat(coin.price)*parseFloat(valueUSD)).toFixed(2)} </td>`;
         cryptoCoin += `<td><form><input name="inputAmount" type="number" step="0.00000001" placeholder="Amount.." required><button type="submit"></button></form></td>`;
     });
-
     document.getElementById("data").innerHTML = cryptoCoin;  
 };
 
@@ -138,8 +131,7 @@ table.addEventListener('submit', (event) => {
 
     // Function adding coin to wallet
     function addingCoin () {
-
-    if (existingCoin.length > 0) {
+        if (existingCoin.length > 0) {
         existingCoin[0].innerText = parseFloat(coinAmount.value) + parseFloat(existingCoin[0].textContent);
 
         const valueClass = '.' + coinSymbol;
@@ -163,7 +155,11 @@ table.addEventListener('submit', (event) => {
     const deleteDiv = document.createElement("div");
     const deleteTh = document.createElement("th");
     
+    deleteDiv.classList.add('deleteBtn');
     nameTh.innerText = coinName;
+    amountTh.innerText = coinAmount.value;
+    amountTh.className += (coinSymbol + '-amount').replace(/ /g,'');
+    valueTh.className += (coinSymbol + '-value');
 
     if (coinPrice < 0.95) {
         priceTh.innerText = parseFloat(coinPrice).toFixed(8);
@@ -171,30 +167,11 @@ table.addEventListener('submit', (event) => {
         priceTh.innerText = parseFloat(coinPrice).toFixed(2);  
     };
 
-    amountTh.innerText = coinAmount.value;
-    amountTh.className += (coinSymbol + '-amount').replace(/ /g,'');
-
-    valueTh.className += (coinSymbol + '-value');
     if (coinValue < 0.95) {
         valueTh.innerText = parseFloat(coinValue).toFixed(8);
     } else {
         valueTh.innerText = parseFloat(coinValue).toFixed(2); 
     };
-
-    deleteDiv.classList.add('deleteBtn');
-
-    // Deleting coin in wallet
-    deleteDiv.addEventListener('click', ()=> {
-        const walletRow = deleteTh.parentElement;
-        
-        Confirm.open({
-            title: 'Delete Confirmation',
-            message: ('Are you sure you want to remove ' + walletRow.cells[2].textContent + walletRow.cells[0].textContent + 'from your wallet?'),
-            onok: () => {
-                walletRow.remove();
-                sumUpWallet();
-        }});
-    });
 
     walletCryptos.appendChild(newTr);
     newTr.appendChild(nameTh);
@@ -206,6 +183,9 @@ table.addEventListener('submit', (event) => {
 
     coinAmount.value = "";
     sumUpWallet();
+
+    const walletValues = [nameTh.textContent, amountTh.textContent];
+    saveLocalCoins(walletValues);
     }};  
 });
 
@@ -219,6 +199,21 @@ function sumUpWallet() {
 document.getElementById('sumDol').innerHTML = sumVal.toFixed(2);
 document.getElementById('sumPln').innerHTML = (sumVal*usdToPln).toFixed(2);
 }
+
+// Deleting coin in wallet
+walletCryptos.addEventListener('click', (e)=> {
+    const item = e.target;
+    const walletCoin = item.parentElement.parentElement;
+    const walletValues = [walletCoin.cells[0].textContent, walletCoin.cells[2].textContent];
+
+    Confirm.open({
+        title: 'Delete Confirmation',
+        message: ('Are you sure you want to remove ' + walletCoin.cells[2].textContent + walletCoin.cells[0].textContent + 'from your wallet?'),
+        onok: () => {
+            removeLocalCoins(walletValues);
+            walletCoin.remove();
+            sumUpWallet();
+    }})});
 
 // Searching funcionality
 const searchInput = document.getElementById('inputSearch');
@@ -240,16 +235,98 @@ function filterList() {
     });
 };
 
-// Wallet Animation
-const walletBtnA = document.querySelector('#walletBtnA');
-const walletBtnB = document.querySelector('#walletBtnB');
-const walletWindow = document.querySelector('.wallet');
+// localStorage operations
+function saveLocalCoins(coin) {
+    let coins;
+    if (localStorage.getItem("coins") === null) {
+        coins = [];
+    } else {
+        coins = JSON.parse(localStorage.getItem("coins"));
+    }
+    coins.push(coin);
+    localStorage.setItem("coins", JSON.stringify(coins));
+}
 
-walletBtnB.addEventListener('click', ()=> {
-    walletWindow.classList.toggle('hidden');
-    walletBtnB.classList.toggle('hidden');
-})
-walletBtnA.addEventListener('click', ()=> {
-    walletWindow.classList.toggle('hidden');
-    walletBtnB.classList.toggle('hidden');
-})
+function removeLocalCoins(coin) {
+    let coins;
+    if (localStorage.getItem("coins") === null) {
+        coins = [];
+    } else {
+        coins = JSON.parse(localStorage.getItem("coins"));
+    }
+    const coinIndex = coin.innerText;
+    coins.splice(coins.indexOf(coinIndex), 1);
+    localStorage.setItem("coins", JSON.stringify(coins));
+}
+
+function getCoins() {
+    let coins;
+    if (localStorage.getItem("coins") === null) {
+        coins = [];
+    } else {
+        coins = JSON.parse(localStorage.getItem("coins"));
+    }
+
+    coins.forEach(function(coin) {
+        const newTr = document.createElement("tr");
+        const nameTh = document.createElement("th");
+        const priceTh = document.createElement("th");
+        const amountTh = document.createElement("th");
+        const valueTh = document.createElement("th");
+        const deleteDiv = document.createElement("div");
+        const deleteTh = document.createElement("th");
+
+        const coinId = ('#' + coin[0]).replace(/ /g,'');
+        const wallCoinPrice = document.querySelector(coinId).cells[3].textContent.match(/\d+(\.\d+)?/)[0];
+        let wallCoinValue = coin[1]*wallCoinPrice;
+
+        nameTh.innerText = coin[0];
+        amountTh.innerText = coin[1];
+        valueTh.className += ('-value');
+        deleteDiv.classList.add('deleteBtn');
+
+
+        if (wallCoinPrice < 0.95) {
+            priceTh.innerText = parseFloat(wallCoinPrice).toFixed(8);
+        } else {
+            priceTh.innerText = parseFloat(wallCoinPrice).toFixed(2);  
+        };
+
+        if (wallCoinValue < 0.95) {
+            valueTh.innerText = parseFloat(wallCoinValue).toFixed(8);
+        } else {
+            valueTh.innerText = parseFloat(wallCoinValue).toFixed(2); 
+        };
+
+        walletCryptos.appendChild(newTr);
+        newTr.appendChild(nameTh);
+        newTr.appendChild(priceTh);
+        newTr.appendChild(amountTh);
+        newTr.appendChild(valueTh);
+        deleteTh.appendChild(deleteDiv);
+        newTr.appendChild(deleteTh);
+
+        sumUpWallet();
+})};
+
+// Wallet Animations
+
+    // Open--Close
+    const walletBtnA = document.querySelector('#walletBtnA');
+    const walletBtnB = document.querySelector('#walletBtnB');
+    const walletWindow = document.querySelector('.wallet');
+
+    walletBtnB.addEventListener('click', ()=> {
+        walletWindow.classList.toggle('hidden');
+        walletBtnB.classList.toggle('hidden');
+    })
+    walletBtnA.addEventListener('click', ()=> {
+        walletWindow.classList.add('wallet--close--animation');
+        walletBtnB.classList.toggle('hidden');
+        setTimeout(()=> {
+            walletWindow.classList.toggle('hidden');
+            walletWindow.classList.remove('wallet--close--animation');
+        }, 200);
+    })
+
+    // New coin added

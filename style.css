@@ -10,6 +10,7 @@ body {
     font-family: 'Titillium Web', sans-serif;
 }
 .bar {
+    position: relative;
     height: 7vh;
     background-color: #FFD700;
     display: flex;
@@ -29,6 +30,10 @@ body {
     border: 2px solid black;
     border-radius: 0 0 20px;
     
+    opacity: 0;
+    animation-name: wallet---open;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
 }
     #wallet__crypto {
        margin: 0 auto;
@@ -42,10 +47,16 @@ body {
             padding-bottom: 1vh;
             font-size: 1vw;
             white-space: nowrap;
-            border-bottom: 1px solid rgb(117, 117, 117);
         }
         #usersCrypto th {
             background-color: rgb(59, 59, 59);
+            border-bottom: 1px solid rgb(117, 117, 117);
+            
+        }
+        .new-coin-animation {
+            animation-name: wallet---newCoin;
+            animation-duration: 0.3s;
+            animation-fill-mode: ease-in-out;
         }
         .deleteBtn {
             background-image: url("https://cdn-icons-png.flaticon.com/512/32/32178.png");
@@ -118,6 +129,12 @@ body {
             top: 7vh;
             left: 0;
             border-radius: 0 20px 20px 0;
+        }
+
+        .wallet--close--animation {
+            animation-name: wallet---close;
+            animation-duration: 0.2s;
+            animation-fill-mode: forwards;
         }
 
 
@@ -325,5 +342,35 @@ body {
     to {
         opacity: 1;
         transform: scale(1);
+    }
+}
+
+@keyframes wallet---open {
+    from { 
+        opacity: 0;
+        left: -20vw;
+        
+     }
+    to { opacity: 1;
+        transform: scale(1);
+        left: 0vw;
+     }
+}
+
+@keyframes wallet---close {
+    from { 
+        left: 0vw;
+        opacity: 1;
+     }
+    to { 
+        left: -20vw;
+        transform: scale(1);
+        opacity: 0;
+     }
+}
+
+@keyframes wallet---newCoin {
+    to {
+        background-color: rgb(80, 80, 80);;
     }
 }
